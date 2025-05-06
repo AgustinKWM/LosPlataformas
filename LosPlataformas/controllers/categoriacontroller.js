@@ -1,7 +1,12 @@
 const categoriaModel = require('../models/categoriamodel');
 
 const crearCategoria = (req, res) => {
-    const categoria = req.body;
+    const { nombre, descripcion } = req.body;
+    if (!nombre || !descripcion) {
+        return res.status(400).json({ message: 'Faltan campos requeridos: nombre y descripcion' });
+    }
+
+    const categoria = { nombre, descripcion };
     categoriaModel.crearCategoria(categoria, (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al crear la categoría', error: err });
@@ -12,7 +17,13 @@ const crearCategoria = (req, res) => {
 
 const editarCategoria = (req, res) => {
     const { id } = req.params;
-    const datos = req.body;
+    const { nombre, descripcion } = req.body;
+
+    if (!nombre || !descripcion) {
+        return res.status(400).json({ message: 'Faltan campos requeridos: nombre y descripcion' });
+    }
+
+    const datos = { nombre, descripcion };
     categoriaModel.editarCategoria(id, datos, (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error al editar la categoría', error: err });

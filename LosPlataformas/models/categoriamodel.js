@@ -1,13 +1,13 @@
 const db = require('../config/bd');
 
 const crearCategoria = (categoria, callback) => {
-    const sql = 'INSERT INTO categoria (nombre_categoria) VALUES (?)';
-    db.query(sql, [categoria.nombre_categoria], callback);
+    const sql = 'INSERT INTO categoria (nombre, descripcion) VALUES (?, ?)';
+    db.query(sql, [categoria.nombre, categoria.descripcion], callback);
 };
 
 const editarCategoria = (id, datos, callback) => {
-    const sql = 'UPDATE categoria SET nombre_categoria = ? WHERE id_categoria = ?';
-    db.query(sql, [datos.nombre_categoria, id], callback);
+    const sql = 'UPDATE categoria SET nombre = ?, descripcion = ? WHERE id_categoria = ?';
+    db.query(sql, [datos.nombre, datos.descripcion, id], callback);
 };
 
 const eliminarCategoria = (id, callback) => {

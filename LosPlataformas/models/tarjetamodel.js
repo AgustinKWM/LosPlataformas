@@ -1,45 +1,46 @@
 const db = require('../config/bd');
 
 const crearTarjeta = (tarjeta, callback) => {
-    const sql = `INSERT INTO tarjeta_credito 
-        (numero_tarjeta, nombre_titular, fecha_expiracion, cvv, idUsuario) 
-        VALUES (?, ?, ?, ?, ?)`;
-    const values = [
-        tarjeta.numero_tarjeta,
-        tarjeta.nombre_titular,
-        tarjeta.fecha_expiracion,
-        tarjeta.cvv,
-        tarjeta.idUsuario
+    const sql = `INSERT INTO Tarjeta_credito 
+    (Numero_tarjeta, Nombre_titular, Fecha_exp, cvv, Usuario_idUsuario) 
+    VALUES (?, ?, ?, ?, ?)`;
+
+const values = [
+    tarjeta.Numero_tarjeta,
+    tarjeta.Nombre_titular,
+    tarjeta.Fecha_exp,
+    tarjeta.cvv,
+    tarjeta.Usuario_idUsuario
     ];
     db.query(sql, values, callback);
 };
 
 const editarTarjeta = (id, datos, callback) => {
-    const sql = `UPDATE tarjeta_credito SET 
-        numero_tarjeta = ?, 
-        nombre_titular = ?, 
-        fecha_expiracion = ?, 
+    const sql = `UPDATE Tarjeta_credito SET 
+        Numero_tarjeta = ?, 
+        Nombre_titular = ?, 
+        Fecha_exp = ?, 
         cvv = ?, 
-        idUsuario = ?
+        Usuario_idUsuario = ?
         WHERE id_tarjeta = ?`;
     const values = [
-        datos.numero_tarjeta,
-        datos.nombre_titular,
-        datos.fecha_expiracion,
+        datos.Numero_tarjeta,
+        datos.Nombre_titular,
+        datos.Fecha_exp,
         datos.cvv,
-        datos.idUsuario,
+        datos.Usuario_idUsuario,
         id
     ];
     db.query(sql, values, callback);
 };
 
 const eliminarTarjeta = (id, callback) => {
-    const sql = 'DELETE FROM tarjeta_credito WHERE id_tarjeta = ?';
+    const sql = 'DELETE FROM Tarjeta_credito WHERE id_tarjeta = ?';
     db.query(sql, [id], callback);
 };
 
 const obtenerTarjetas = (callback) => {
-    const sql = 'SELECT * FROM tarjeta_credito';
+    const sql = 'SELECT * FROM Tarjeta_credito';
     db.query(sql, callback);
 };
 
